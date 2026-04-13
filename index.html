@@ -169,7 +169,8 @@
         <input type="file" id="fileInput" STYLE="background-color: #FF6600;">
       </div>
       <div id="messageDisplayArea"></div>
-      
+    
+     <!-- ===================== CANVAS 1 ===================== -->
       <canvas id="myCanvas" width=600 height=500 
           style="border:1px solid #d3d3d3;"></canvas>
       <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
@@ -181,6 +182,20 @@
         context.fillText("Original image will go here", 10, 20);
       </script>
 
+   <!-- ===================== CANVAS 2 ===================== -->
+    <canvas id="dataCanvas" width="600" height="500"
+      style="border:3px solid blue;"></canvas>
+
+    <script>
+      var canvas2 = document.getElementById('dataCanvas');
+      var context2 = canvas2.getContext("2d");
+
+      context2.font = '20pt Calibri';
+      context2.fillStyle = "blue";
+      context2.fillText("Blue intensity image will appear here", 10, 30);
+    </script>
+
+  </div>
     </div><!-- /content -->
     <div data-role="footer" data-position="fixed">
       <p>DIY Diagnostics</p>
