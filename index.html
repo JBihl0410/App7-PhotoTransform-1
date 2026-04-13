@@ -102,7 +102,43 @@
 
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
           
-          
+          /* Get canvas 2 and its context */
+          var canvas2 = document.getElementById('dataCanvas');
+          var context2 = canvas2.getContext("2d");
+
+          /* Draw SAME image onto canvas 2 first */
+          drawImageIOSFix(context2, img,
+            0, 0, img.naturalWidth, img.naturalHeight,
+            0, 0, 600, 500);
+
+          /* Get pixel data from canvas 2 */
+          var imageData = context2.getImageData(0, 0, canvas2.width, canvas2.height);
+
+          /* This array holds ALL pixel values
+             Format per pixel: [R, G, B, A] */
+          var data = imageData.data;
+
+          /* LOOP through every pixel
+             Each pixel = 4 values (RGBA)
+          */
+          for (var i = 0; i < data.length; i += 4) {
+
+            /* Remove RED and GREEN channels */
+            data[i] = 0;       // Red = 0
+            data[i + 1] = 0;   // Green = 0
+
+            /* Keep BLUE channel unchanged */
+            // data[i + 2] stays the same
+
+            /* Alpha (opacity) stays unchanged */
+          }
+
+          console.log("Blue filter applied");
+
+          /* Put modified image back onto canvas 2 */
+          context2.putImageData(imageData, 0, 0);
+
+          console.log("Processed image displayed");          
           
           
         } // end of img.onload
@@ -134,10 +170,12 @@
       </div>
       <div id="messageDisplayArea"></div>
       
-      <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
+      <canvas id="myCanvas" width=600 height=500 
+          style="border:1px solid #d3d3d3;"></canvas>
       <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext("2d");
+       
         context.font = '20pt Calibri';
         context.fillStyle = "black";
         context.fillText("Original image will go here", 10, 20);
